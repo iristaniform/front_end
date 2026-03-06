@@ -1,0 +1,157 @@
+/* styles.css - Modern & Professional Hospital Management System */
+
+/* ================ BASE & RESET ================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: #f5f7fa;
+    color: #2d3748;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ================ NAVIGATION ================ */
+nav {
+    background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+    color: white;
+    padding: 1.2rem 2.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 0.6rem 0.4rem;
+    transition: all 0.22s ease;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2.5px;
+    bottom: 0;
+    left: 50%;
+    background-color: #e2e8f0;
+    transition: all 0.28s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 70%;
+}
+
+nav a:hover,
+nav a:focus {
+    color: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+/* ================ FOOTER PART IN NAV ================ */
+nav p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+nav p:first-of-type {
+    font-weight: 500;
+}
+
+/* ================ MAIN CONTENT ================ */
+#content {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2.5rem;
+}
+
+h1 {
+    color: #2b6cb0;
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.5px;
+}
+
+#content p {
+    font-size: 1.18rem;
+    color: #4a5568;
+    max-width: 720px;
+}
+
+/* Subtle welcome card effect */
+#content {
+    background: white;
+    padding: 3.5rem 4rem;
+    border-radius: 16px;
+    box-shadow: 
+        0 10px 25px -5px rgba(0, 0, 0, 0.08),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+}
+
+/* ================ RESPONSIVE DESIGN ================ */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 1.5rem 1.8rem;
+        gap: 1.8rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    nav a {
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    #content {
+        margin: 2rem 1rem;
+        padding: 2.5rem 2rem;
+    }
+
+    h1 {
+        font-size: 2.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.85rem;
+    }
+
+    #content {
+        padding: 2rem 1.5rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+}
