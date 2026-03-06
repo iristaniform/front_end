@@ -1,6 +1,6 @@
-/* styles.css - Modern & Professional Hospital Management System */
+/* styles.css - Modern Hospital Management System with Left Sidebar */
 
-/* ================ BASE & RESET ================ */
+/* ================ RESET & BASE ================ */
 * {
     margin: 0;
     padding: 0;
@@ -9,149 +9,181 @@
 
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-color: #f5f7fa;
-    color: #2d3748;
-    line-height: 1.6;
+    background-color: #f7f9fc;
+    color: #1e293b;
     min-height: 100vh;
 }
 
-/* ================ NAVIGATION ================ */
-nav {
-    background: linear-gradient(135deg, #2b6cb0 0%, #2c5282 100%);
+/* ================ LAYOUT ================ */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================ SIDEBAR ================ */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%);
     color: white;
-    padding: 1.2rem 2.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.12);
     position: sticky;
     top: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    height: 100vh;
+    overflow-y: auto;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
+.sidebar-header {
+    padding: 2rem 1.8rem 1.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.05rem;
-    padding: 0.6rem 0.4rem;
-    transition: all 0.22s ease;
-    position: relative;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2.5px;
-    bottom: 0;
-    left: 50%;
-    background-color: #e2e8f0;
-    transition: all 0.28s ease;
-    transform: translateX(-50%);
-}
-
-nav a:hover::after,
-nav a.active::after {
-    width: 70%;
-}
-
-nav a:hover,
-nav a:focus {
-    color: #e2e8f0;
-    transform: translateY(-1px);
-}
-
-/* ================ FOOTER PART IN NAV ================ */
-nav p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    font-weight: 400;
-}
-
-nav p:first-of-type {
-    font-weight: 500;
-}
-
-/* ================ MAIN CONTENT ================ */
-#content {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 2.5rem;
-}
-
-h1 {
-    color: #2b6cb0;
-    font-size: 2.6rem;
+.sidebar-header h2 {
+    font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 1.2rem;
     letter-spacing: -0.5px;
 }
 
-#content p {
-    font-size: 1.18rem;
-    color: #4a5568;
-    max-width: 720px;
+.sidebar-header .version {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.35rem;
 }
 
-/* Subtle welcome card effect */
+.sidebar-nav {
+    flex: 1;
+    padding: 2rem 1rem;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav a {
+    display: block;
+    color: rgba(255,255,255,0.92);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 1rem 1.6rem;
+    border-radius: 10px;
+    margin: 0.35rem 0.75rem;
+    transition: all 0.22s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a:focus {
+    background: rgba(255,255,255,0.13);
+    color: white;
+    transform: translateX(4px);
+}
+
+.sidebar-nav a.active {
+    background: rgba(255,255,255,0.22);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+
+/* Footer in sidebar */
+.sidebar-footer {
+    padding: 1.5rem 2rem;
+    font-size: 0.88rem;
+    opacity: 0.85;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: auto;
+}
+
+.sidebar-footer p {
+    margin: 0.25rem 0;
+}
+
+/* ================ MAIN CONTENT ================ */
+.main-content {
+    flex: 1;
+    background: #f8fafc;
+    padding: 2.5rem 3rem;
+    overflow-y: auto;
+}
+
 #content {
+    max-width: 1100px;
+    margin: 0 auto;
     background: white;
     padding: 3.5rem 4rem;
     border-radius: 16px;
     box-shadow: 
-        0 10px 25px -5px rgba(0, 0, 0, 0.08),
-        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        0 10px 35px -10px rgba(0, 0, 0, 0.07),
+        0 8px 20px -8px rgba(0, 0, 0, 0.05);
     border: 1px solid #e2e8f0;
 }
 
-/* ================ RESPONSIVE DESIGN ================ */
-@media (max-width: 768px) {
-    nav {
+h1 {
+    color: #1e40af;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1.3rem;
+    letter-spacing: -0.6px;
+}
+
+#content p {
+    font-size: 1.2rem;
+    color: #475569;
+    line-height: 1.7;
+}
+
+/* ================ RESPONSIVE ================ */
+@media (max-width: 992px) {
+    .layout-container {
         flex-direction: column;
-        padding: 1.5rem 1.8rem;
-        gap: 1.8rem;
     }
 
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.2rem;
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    nav a {
-        font-size: 1.1rem;
-        padding: 0.5rem 1rem;
+    .sidebar-nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    .sidebar-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .sidebar-nav a {
+        margin: 0;
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .sidebar-footer {
+        text-align: center;
+        padding: 1.2rem;
+    }
+
+    .main-content {
+        padding: 2rem 1.5rem;
     }
 
     #content {
-        margin: 2rem 1rem;
         padding: 2.5rem 2rem;
-    }
-
-    h1 {
-        font-size: 2.1rem;
     }
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 1.85rem;
+        font-size: 2.1rem;
     }
 
-    #content {
-        padding: 2rem 1.5rem;
-    }
-
-    nav ul {
-        gap: 1rem;
+    .sidebar-header h2 {
+        font-size: 1.5rem;
     }
 }
