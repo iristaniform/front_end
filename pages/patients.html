@@ -128,12 +128,8 @@
         const formContainer = document.getElementById('patient-form-container');
         const noPatientsMsg = document.getElementById('no-patients');
 
-        // For now - you should replace this with real fetch() to your backend
+      
         function loadPatients() {
-            // This is dummy data - replace with real API call
-            patients = [
-                // {patient_id: 1, first_name: "John", ...}
-            ];
 
             // use fetch api
             fetch('http://localhost:8000/patients/list')
@@ -141,7 +137,7 @@
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                return response.json();   // .json(), .text(), .blob(), etc.
+                return response.json();  
             })
             .then(data => {
                 patients = data;
@@ -183,7 +179,9 @@
         }
 
         function showForm(isEdit = false) {
-            form.reset();
+            if (!isEdit) {
+                form.reset();
+            }
             document.getElementById('form-title').textContent = isEdit ? 'Edit Patient' : 'Add New Patient';
             document.getElementById('btn-save').textContent = isEdit ? 'Update Patient' : 'Save Patient';
             formContainer.style.display = 'block';
@@ -221,15 +219,13 @@
 
             try {
                 let response;
-                let url = '/patients';           // adjust if your API prefix is different (e.g. /api/patients)
+                let url = 'http://localhost:8000/patient';           // adjust if your API prefix is different (e.g. /api/patients)
                 let method = 'POST';
 
                 if (editingId) {
                     // UPDATE (PUT)
                     method = 'PUT';
-                    url = `/patients/${editingId}`;
-                    // Remove patient_id from body if your backend doesn't expect it in PUT body
-                    delete patientData.patient_id;  
+                    url = `${url}/${editingId}`;
                 }
 
                 response = await fetch(url, {
@@ -248,22 +244,11 @@
 
                 const result = await response.json();
 
-                // ────────────────────────────────────────────────
-                // Option A: Refresh the full list from server (recommended)
+
                 loadPatients();
-
-                // Option B: Update local array manually (faster but can get out of sync)
-                // if (editingId) {
-                //     const index = patients.findIndex(p => p.patient_id === editingId);
-                //     if (index !== -1) patients[index] = result;
-                // } else {
-                //     patients.push(result);
-                // }
-
                 hideForm();
                 form.reset();
                 editingId = null;           // reset edit mode
-                // Optional: document.getElementById('form-title').textContent = "Add New Patient";
 
             } catch (error) {
                 console.error("Error saving patient:", error);
@@ -276,6 +261,7 @@
             if (!patient) return;
 
             editingId = id;
+            
             document.getElementById('patient_id').value = patient.patient_id;
             document.getElementById('first_name').value = patient.first_name;
             document.getElementById('last_name').value = patient.last_name;
@@ -292,14 +278,14 @@
 
             // Here you would do fetch(`/api/patients/${id}`, {method: 'DELETE'})
             fetch(`http://localhost:8000/patients/${id}`, {
-            method: 'DELETE',
+                method: 'DELETE',
             })
             .then(response => {
                 if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                // Most DELETE endpoints return 200/204 with no content or minimal data
-                return response.text();  // or response.json() if API returns JSON
+                
+                return response.json();
             })
             .then(data => {
                 console.log('Delete successful', data || 'No content returned');
