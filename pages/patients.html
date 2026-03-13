@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Management System</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
+
 <body>
 
     <div class="layout-container">
@@ -35,12 +37,87 @@
         <!-- Main Content Area -->
         <main class="main-content">
             <section id="content">
-                <h1>Welcome to the Hospital Management System</h1>
-                <p>Manage your hospital efficiently with our comprehensive system.</p>
+                <div class="page-header">
+                    <h1>Patients Management</h1>
+                    <button id="btn-add-patient" class="btn btn-primary">+ Add New Patient</button>
+                </div>
+
+                <!-- Patient Form (hidden by default - shown when adding or editing) -->
+                <div class="card form-container" id="patient-form-container" style="display: none;">
+                    <h2 id="form-title">Add New Patient</h2>
+
+                    <form id="patient-form">
+                        <input type="hidden" id="patient_id" name="patient_id">
+
+                        <div class="form-group">
+                            <label for="first_name">First Name *</label>
+                            <input type="text" id="first_name" name="first_name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Last Name *</label>
+                            <input type="text" id="last_name" name="last_name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date_of_birth">Date of Birth *</label>
+                            <input type="date" id="date_of_birth" name="date_of_birth" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gender *</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gender" value="male" required> Male</label>
+                                <label><input type="radio" name="gender" value="female" required> Female</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="tel" id="phone_number" name="phone_number" placeholder="+237 6XX XXX XXX">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="patient@example.com">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success" id="btn-save">Save Patient</button>
+                            <button type="button" class="btn btn-secondary" id="btn-cancel">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Patients Table -->
+                <div class="card table-container">
+                    <table id="patients-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Date of Birth</th>
+                                <th>Gender</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patients-table-body">
+                            <!-- Data will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+
+                    <div id="no-patients" class="empty-state" style="display: none;">
+                        <p>No patients found in the system.</p>
+                    </div>
+                </div>
             </section>
         </main>
 
     </div>
 
 </body>
+
 </html>
