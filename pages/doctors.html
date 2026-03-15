@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors - Hospital Management System</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../doctors.css">
+    </head>
+<body>
+
+    <div class="layout-container">
+
+        <!-- Sidebar (unchanged) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Hospital MS</h2>
+                <p class="version">Version 1.0</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./patients.html">Patients</a></li>
+                    <li><a href="./doctors.html" class="active">Doctors</a></li>
+                    <li><a href="./appointments.html">Appointments</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>© 2026 Hospital Management System</p>
+                <p>All rights reserved.</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section id="content">
+                <div class="page-header">
+                    <div>
+                        <h1>Doctors Management</h1>
+                        <p>Manage hospital doctors and their details.</p>
+                    </div>
+                    <button id="btn-add-doctor" class="btn btn-primary">+ Add New Doctor</button>
+                </div>
+
+                <!-- FORM – Add / Edit Doctor -->
+                <div class="card form-container" id="doctor-form-container" style="display:none;">
+                    <h3 id="form-title">Add New Doctor</h3>
+                    <form id="doctor-form">
+                        <input type="hidden" id="doctor-id" name="doctor_id">
+
+                        <div class="form-group">
+                                <label for="first_name">First Name *</label>
+                                <input type="text" id="first_name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="last_name">Last Name *</label>
+                                <input type="text" id="last_name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="specialization">Specialization</label>
+                                <input type="text" id="specialization" placeholder="e.g. Cardiology, Pediatrics">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number</label>
+                                <input type="tel" id="phone_number" placeholder="+237 6XX XXX XXX">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="doctor@hospital.cm">
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" id="btn-save" class="btn btn-primary">Save Doctor</button>
+                                <button type="button" id="btn-cancel" class="btn btn-secondary">Cancel</button>
+                             </div>
+                    </form>
+                </div>
+
+                <!-- Doctors Table -->
+                <div class="card table-container">
+                    <table id="doctors-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Specialization</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doctors-table-body">
+                            <!-- Rows added by JavaScript -->
+                        </tbody>
+                    </table>
+
+                 <div id="no-doctor" class="empty-state" style="display: none;"> 
+                 <p>no doctors found in the system.</p>   
+                </div>
+                </div>
+            </section>
+        </main>
+
+        </div>
+    
+
+    <script>
+
+let doctors = [];           
+let editingId = null;
+
+const form = document.getElementById('doctor-form');
+const tableBody = document.getElementById('doctors-table-body');
+const formContainer = document.getElementById('doctor-form-container');
+const noDoctorsMsg = document.getElementById('no-doctor');
+
+
+function loadDoctors() {
+
+    let url = 'http://localhost:8000/doctors';
+    fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        doctors = data;
+        renderDoctors();
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
+}
+
+
+function renderDoctors() {
+
+    tableBody.innerHTML = '';
+
+    if (doctors.length === 0) {
+        noDoctorsMsg.style.display = 'block';
+        return;
+    }
+
+    noDoctorsMsg.style.display = 'none';
+
+    doctors.forEach(doctor => {
+
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>D${String(doctor.doctor_id).padStart(3, '0')}</td>
+            <td>${doctor.first_name} ${doctor.last_name}</td>
+            <td>${doctor.specialization || '-'}</td>
+            <td>${doctor.phone_number || '-'}</td>
+            <td>${doctor.email || '-'}</td>
+
+            <td class="action-buttons">
+                <button class="btn btn-primary btn-sm" onclick="editDoctor(${doctor.doctor_id})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteDoctor(${doctor.doctor_id})">Delete</button>
+            </td>
+        `;
+
+        tableBody.appendChild(row);
+
+    });
+}
+
+
+function showForm(isEdit = false) {
+
+    if (!isEdit) {
+        form.reset();
+    }
+
+    document.getElementById('form-title').textContent = isEdit ? 'Edit Doctor' : 'Add New Doctor';
+
+    document.getElementById('btn-save').textContent = isEdit ? 'Update Doctor' : 'Save Doctor';
+
+    formContainer.style.display = 'block';
+
+    document.getElementById('btn-add-doctor').style.display = 'none';
+
+}
+
+
+function hideForm() {
+
+    formContainer.style.display = 'none';
+
+    document.getElementById('btn-add-doctor').style.display = 'inline-block';
+
+    editingId = null;
+
+}
+
+
+document.getElementById('btn-add-doctor')
+.addEventListener('click', () => showForm(false));
+
+document.getElementById('btn-cancel')
+.addEventListener('click', hideForm);
+
+
+
+form.addEventListener('submit', async function (e) {
+
+    e.preventDefault();
+
+    const doctorData = {
+
+        doctor_id: document.getElementById('doctor-id').value || null,
+
+        first_name: document.getElementById('first_name').value,
+
+        last_name: document.getElementById('last_name').value,
+
+        specialization: document.getElementById('specialization').value || null,
+
+        phone_number: document.getElementById('phone_number').value || null,
+
+        email: document.getElementById('email').value || null
+    };
+
+
+    if (!doctorData.first_name || !doctorData.last_name) {
+
+        alert("First name and last name are required!");
+
+        return;
+
+    }
+
+    try {
+
+        let response;
+
+        let url = 'http://localhost:8000/doctors';
+
+        let method = 'POST';
+
+
+        if (editingId) {
+
+            method = 'PUT';
+
+            url = `${url}/${editingId}`;
+
+        }
+
+
+        response = await fetch(url, {
+
+            method: method,
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+            },
+
+            body: JSON.stringify(doctorData)
+
+        });
+
+
+        if (!response.ok) {
+
+            const errorData = await response.json().catch(() => ({}));
+
+            throw new Error(errorData.detail || `HTTP error! Status: ${response.status}`);
+
+        }
+
+
+        await response.json();
+
+        loadDoctors();
+
+        hideForm();
+
+        form.reset();
+
+        editingId = null;
+
+    }
+
+    catch (error) {
+
+        console.error("Error saving doctor:", error);
+
+        alert("Failed to save doctor: " + error.message);
+
+    }
+
+});
+
+
+
+function editDoctor(id) {
+
+    const doctor = doctors.find(d => d.doctor_id === id);
+
+    if (!doctor) return;
+
+    editingId = id;
+
+
+    document.getElementById('doctor-id').value = doctor.doctor_id;
+
+    document.getElementById('first_name').value = doctor.first_name;
+
+    document.getElementById('last_name').value = doctor.last_name;
+
+    document.getElementById('specialization').value = doctor.specialization || '';
+
+    document.getElementById('phone_number').value = doctor.phone_number || '';
+
+    document.getElementById('email').value = doctor.email || '';
+
+
+    showForm(true);
+
+}
+
+
+
+function deleteDoctor(id) {
+
+    if (!confirm('Are you sure you want to delete this doctor?')) return;
+
+
+    fetch(`http://localhost:8000/doctors${id}`, {
+
+        method: 'DELETE',
+
+    })
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        console.log('Delete successful', data || 'No content returned');
+
+        loadDoctors();
+
+    })
+
+    .catch(error => {
+
+        console.error('Error deleting resource:', error);
+
+    });
+
+}
+
+
+
+loadDoctors();
+
+</script>

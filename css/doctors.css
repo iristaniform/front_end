@@ -1,0 +1,45 @@
+/* ===== FORM CONTAINER ===== */
+
+.form-container {
+    max-width: 600px;
+}
+
+/* ===== FORM GROUP ===== */
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* ===== FORM ACTION BUTTONS ===== */
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+/* ===== TABLE ACTION BUTTONS ===== */
+
+.action-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+/* ===== SMALL UI IMPROVEMENTS ===== */
+
+#form-title {
+    margin-bottom: 15px;
+}
