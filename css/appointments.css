@@ -1,0 +1,223 @@
+/* ───────────────────────────────────────────────
+   appointments.css
+   Specific styling for the Appointments page
+   ─────────────────────────────────────────────── */
+
+/* ==================== General page tweaks ==================== */
+.main-content {
+    padding: 24px 32px;
+    background: #f8fafc;
+}
+
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h1 {
+    margin: 0 0 8px 0;
+    font-size: 2rem;
+    color: #1e293b;
+}
+
+.page-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 1.05rem;
+}
+
+/* ==================== Cards ==================== */
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06),
+                0 1px 3px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 32px;
+    border: 1px solid #e2e8f0;
+}
+
+.card h2 {
+    margin: 0;
+    padding: 20px 24px;
+    font-size: 1.35rem;
+    color: #1e40af;            /* deep blue – medical/trustworthy */
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+
+/* ==================== Form styling ==================== */
+.form-card {
+    padding: 0;
+}
+
+.form-group {
+    padding: 0 24px;
+    margin: 20px 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.97rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.form-group textarea {
+    min-height: 94px;
+    resize: vertical;
+}
+
+.form-actions {
+    padding: 20px 24px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    text-align: right;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    font-size: 0.96rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-secondary {
+    background: #6b7280;
+    color: white;
+    border: none;
+    margin-left: 12px;
+}
+
+.btn-secondary:hover {
+    background: #4b5563;
+}
+
+/* ==================== Table ==================== */
+.table-card {
+    padding: 0;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+}
+
+th {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.92rem;
+    border-bottom: 2px solid #cbd5e1;
+}
+
+td {
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    font-size: 0.96rem;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+/* Action buttons inside table */
+.action-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.13s;
+}
+
+.btn-edit {
+    background: #ca8a04;
+    color: white;
+    margin-right: 6px;
+}
+
+.btn-edit:hover {
+    background: #a16207;
+}
+
+.btn-delete {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #b91c1c;
+}
+
+/* ==================== Responsive fixes ==================== */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 16px 20px;
+    }
+    
+    .form-actions {
+        text-align: center;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+    
+    .btn-secondary {
+        margin: 0;
+    }
+}
+
+/* Optional: highlight required fields */
+.form-group label::after {
+    content: "*";
+    color: #ef4444;
+    margin-left: 4px;
+    font-size: 0.9rem;
+}
+
+/* Remove * from non-required labels if you want */
+/* .form-group label[for="reason_for_visit"]::after { content: ""; } */
