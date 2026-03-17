@@ -6,6 +6,7 @@
     <title>Doctors - Hospital Management System</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../doctors.css">
+    <link rel="stylesheet" href="../css/doctors.css">
     </head>
 <body>
 
@@ -33,21 +34,17 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <section id="content">
-                <div class="page-header">
-                    <div>
-                        <h1>Doctors Management</h1>
-                        <p>Manage hospital doctors and their details.</p>
-                    </div>
-                    <button id="btn-add-doctor" class="btn btn-primary">+ Add New Doctor</button>
-                </div>
+        <div class="main-content">   <!-- use the same wrapper class as patients.html -->
+  <div class="card">        <!-- use the same card class -->
+    <h1>Doctors Management</h1>
+    
+    <div style="text-align: right; margin-bottom: 20px;">
+      <button class="add-btn">+ Add New Doctor</button>
+    </div>
 
                 <!-- FORM – Add / Edit Doctor -->
                 <div class="card form-container" id="doctor-form-container" style="display:none;">
-                    <h3 id="form-title">Add New Doctor</h3>
-                    <form id="doctor-form">
+                   <form id="doctor-form">
                         <input type="hidden" id="doctor-id" name="doctor_id">
 
                         <div class="form-group">
@@ -83,30 +80,34 @@
                 </div>
 
                 <!-- Doctors Table -->
-                <div class="card table-container">
-                    <table id="doctors-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Specialization</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="doctors-table-body">
-                            <!-- Rows added by JavaScript -->
-                        </tbody>
-                    </table>
+                <div class="card">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h1 style="margin: 0; color: #1e40af;">Doctors Management</h1>
+    <button class="add-btn">+ Add New Doctor</button>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Specialization</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="doctorsTableBody">
+      
+    </tbody>
+  </table>
 
                  <div id="no-doctor" class="empty-state" style="display: none;"> 
                  <p>no doctors found in the system.</p>   
                 </div>
                 </div>
-            </section>
-        </main>
-
+           
         </div>
     
 
@@ -116,7 +117,7 @@ let doctors = [];
 let editingId = null;
 
 const form = document.getElementById('doctor-form');
-const tableBody = document.getElementById('doctors-table-body');
+const tableBody = document.getElementById('doctorsTableBody');
 const formContainer = document.getElementById('doctor-form-container');
 const noDoctorsMsg = document.getElementById('no-doctor');
 
@@ -158,7 +159,8 @@ function renderDoctors() {
 
         row.innerHTML = `
             <td>D${String(doctor.doctor_id).padStart(3, '0')}</td>
-            <td>${doctor.first_name} ${doctor.last_name}</td>
+            <td>${doctor.first_name}</td
+            <td>${doctor.last_name}</td>
             <td>${doctor.specialization || '-'}</td>
             <td>${doctor.phone_number || '-'}</td>
             <td>${doctor.email || '-'}</td>
@@ -373,7 +375,9 @@ function deleteDoctor(id) {
 }
 
 
-
+// Load initial data
 loadDoctors();
 
 </script>
+</body>
+</html>

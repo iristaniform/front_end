@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../styles.css">
     
     <!-- Page-specific styles (remove if merged into styles.css) -->
-    <link rel="stylesheet" href="../appointments.css">
+    <link rel="stylesheet" href="../css/appointments.css">
 </head>
 <body>
 
@@ -71,11 +71,7 @@
                             <input type="date" id="appointment_date" name="appointment_date" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="appointment_time">Time *</label>
-                            <input type="time" id="appointment_time" name="appointment_time" required>
-                        </div>
-
+                        
                         <div class="form-group">
                             <label for="reason_for_visit">Reason / Notes</label>
                             <textarea id="reason_for_visit" name="reason_for_visit" rows="3" 
@@ -103,7 +99,6 @@
                                     <th>Patient</th>
                                     <th>Doctor</th>
                                     <th>Date</th>
-                                    <th>Time</th>
                                     <th>Status</th>
                                     <th>Notes</th>
                                     <th>Actions</th>
@@ -179,14 +174,15 @@
 
         async function loadDoctors() {
             try {
-                const doctors = await apiFetch('/doctors/list');
-                const select = document.getElementById('doctor_id');
-                select.innerHTML = '<option value="">Select Doctor</option>';
+                const data = await apiFetch('/doctors/list');
+                const doctors = data.doctors || [];
+                const list = document.getElementById('doctor_id');
+                list.innerHTML = '<option value="">Select Doctor</option>';
                 doctors.forEach(d => {
                     const opt = document.createElement('option');
                     opt.value = d.doctor_id;
                     opt.textContent = `${d.first_name} ${d.last_name} (${d.specialization})`;
-                    select.appendChild(opt);
+                    list.appendChild(opt);
                 });
             } catch (err) {
                 console.error('Failed to load doctors', err);
@@ -214,8 +210,6 @@
                         <td>${appt.patient_name || '—'}</td>
                         <td>${appt.doctor_name || '—'}</td>
                         <td>${appt.appointment_date || '—'}</td>
-                        <td>${(appt.appointment_time || '').slice(0,5) || '—'}</td>
-                        <td>${appt.status || 'pending'}</td>
                         <td>${appt.notes || '—'}</td>
                         <td>
                             <button class="btn btn-sm btn-edit" data-id="${appt.appointment_id}">Edit</button>
@@ -237,10 +231,9 @@
             const patient_id = document.getElementById('patient_id').value;
             const doctor_id = document.getElementById('doctor_id').value;
             const date = document.getElementById('appointment_date').value;
-            const time = document.getElementById('appointment_time').value;
             const notes = document.getElementById('reason_for_visit').value.trim();
 
-            if (!patient_id || !doctor_id || !date || !time) {
+            if (!patient_id || !doctor_id || !date) {
                 alert('Please fill all required fields');
                 return;
             }
@@ -249,8 +242,7 @@
                 patient_id: parseInt(patient_id),
                 doctor_id: parseInt(doctor_id),
                 appointment_date: date,
-                appointment_time: time + ':00',   // MySQL TIME expects HH:MM:SS
-                notes: notes || null,
+notes: notes || null,
             };
 
             try {
@@ -288,8 +280,7 @@
                     document.getElementById('patient_id').value = appt.patient_id;
                     document.getElementById('doctor_id').value = appt.doctor_id;
                     document.getElementById('appointment_date').value = appt.appointment_date;
-                    document.getElementById('appointment_time').value = (appt.appointment_time || '').slice(0,5);
-                    document.getElementById('reason_for_visit').value = appt.notes || '';
+                   document.getElementById('reason_for_visit').value = appt.notes || '';
 
                     document.getElementById('form-title').textContent = 'Edit Appointment';
                     document.getElementById('submitBtn').textContent = 'Update Appointment';

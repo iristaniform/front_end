@@ -43,3 +43,296 @@
 #form-title {
     margin-bottom: 15px;
 }
+
+
+/* ====================== DOCTORS MANAGEMENT PAGE STYLING ====================== */
+/* This makes it look exactly like Patients Management */
+
+.main-content {
+    padding: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+/* Title and Add Button - same as Patients */
+.card h1 {
+    color: #1e40af;
+    font-size: 28px;
+    margin: 0 0 20px 0;
+}
+
+.add-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 20px;
+}
+
+.add-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Table styling - exactly like Patients */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 15px;
+}
+
+table th {
+    background: #f8fafc;
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #334155;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1e2937;
+}
+
+table tr:hover {
+    background: #f8fafc;
+}
+
+/* Action buttons */
+.edit-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+.delete-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-btn:hover {
+    background: #2563eb;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+}
+
+/* Make Gender/Specialization look nice */
+table td:nth-child(4) {   /* Specialization column */
+    font-weight: 500;
+    color: #1e40af;
+}
+/* Make it look exactly like Patients */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 25px;
+  margin: 20px;
+}
+
+.add-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #1d4ed8;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.data-table th {
+  background: #f8fafc;
+  padding: 14px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.data-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Buttons like in Patients */
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-btn:hover { background: #2563eb; }
+.delete-btn:hover { background: #dc2626; }
+
+/* ====================== DOCTORS MANAGEMENT - MATCH PATIENTS ====================== */
+
+.main-content {
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+/* Title */
+.card h1 {
+    color: #1e40af;
+    font-size: 28px;
+    margin: 0 0 20px 0;
+}
+
+/* Add New Doctor Button */
+.add-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Table - Exact match to Patients */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th {
+    background: #f8fafc;
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #334155;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.data-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1e2937;
+}
+
+.data-table tr:hover {
+    background: #f8fafc;
+}
+
+/* Action Buttons */
+.edit-btn, .btn-primary {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+.delete-btn, .btn-danger {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-btn:hover, .btn-primary:hover { background: #2563eb; }
+.delete-btn:hover, .btn-danger:hover { background: #dc2626; }
+
+/* Form styling (optional but nice) */
+.form-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+.form-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-secondary {
+    background: #64748b;
+    color: white;
+    margin-left: 10px;
+}
