@@ -119,6 +119,7 @@
 
     </div>
 
+    
     <script>
         let patients = [];           // Will hold the patient data
         let editingId = null;
@@ -174,6 +175,7 @@
                     <button class="btn btn-danger btn-sm" onclick="deletePatient(${patient.patient_id})">Delete</button>
                 </td>
             `;
+                console.log(row);
                 tableBody.appendChild(row);
             });
         }
@@ -299,6 +301,7 @@
         // Load initial data
         loadPatients();
     </script>
+
 
 </body>
 
