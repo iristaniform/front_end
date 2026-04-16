@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Management System</title>
+    <title>Hospital Management System - Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
@@ -19,10 +20,10 @@
 
             <nav class="sidebar-nav">
                 <ul>
-                    <li><a href="./index.html" class="active">Home</a></li>
-                    <li><a href="./pages/patients.html">Patients</a></li>
-                    <li><a href="./pages/doctors.html">Doctors</a></li>
-                    <li><a href="./pages/appointments.html">Appointments</a></li>
+                    <li><a href="#" class="active" onclick="showTab('dashboard')">Dashboard</a></li>
+                    <li><a href="#" onclick="showTab('patients')">Patients</a></li>
+                    <li><a href="#" onclick="showTab('doctors')">Doctors</a></li>
+                    <li><a href="#" onclick="showTab('appointments')">Appointments</a></li>
                 </ul>
             </nav>
 
@@ -34,13 +35,130 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
-            <section id="content">
-                <h1>Welcome to the Hospital Management System</h1>
-                <p>Manage your hospital efficiently with our comprehensive system.</p>
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <div class="dashboard-header">
+                    <h1>Hospital Management Dashboard</h1>
+                    <p>Overview of your hospital operations</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-patients">-</h3>
+                            <p>Total Patients</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-doctors">-</h3>
+                            <p>Total Doctors</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-appointments">-</h3>
+                            <p>Total Appointments</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Appointments</h2>
+                    <div class="activity-list" id="recent-appointments">
+                        <p>Loading recent appointments...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patients Tab -->
+            <section id="patients" class="tab-content">
+                <div class="page-header">
+                    <h1>Patients Management</h1>
+                    <button id="btn-add-patient" class="btn btn-primary">+ Add New Patient</button>
+                </div>
+                <div class="data-table-container">
+                    <table id="patients-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Date of Birth</th>
+                                <th>Gender</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patients-tbody">
+                            <tr><td colspan="7">Loading patients...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Doctors Tab -->
+            <section id="doctors" class="tab-content">
+                <div class="page-header">
+                    <h1>Doctors Management</h1>
+                    <button id="btn-add-doctor" class="btn btn-primary">+ Add New Doctor</button>
+                </div>
+                <div class="data-table-container">
+                    <table id="doctors-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Specialization</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="doctors-tbody">
+                            <tr><td colspan="6">Loading doctors...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Appointments Tab -->
+            <section id="appointments" class="tab-content">
+                <div class="page-header">
+                    <h1>Appointments Management</h1>
+                    <button id="btn-add-appointment" class="btn btn-primary">+ Schedule Appointment</button>
+                </div>
+                <div class="data-table-container">
+                    <table id="appointments-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Date</th>
+                                <th>Reason</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments-tbody">
+                            <tr><td colspan="6">Loading appointments...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </main>
 
     </div>
 
+    <script src="dashboard.js"></script>
 </body>
 </html>
